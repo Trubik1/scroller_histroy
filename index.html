@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дворец Румянцевых-Паскевичей · Гомель · 1777–2026</title>
+<meta name="description" content="Интерактивная история Дворца Румянцевых-Паскевичей в Гомеле — от Екатерины II до наших дней. Scrollytelling-проект.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/animations.css">
+<style>
+  html { scroll-behavior: auto; }
+  body { background: var(--bg-primary); }
+  .loading-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--bg-primary);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  .loading-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .loading-text { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; animation: pulse-loading 1.5s ease-in-out infinite; }
+  @keyframes pulse-loading { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loading-overlay" aria-hidden="true">
+  <span class="loading-text">Загружаем историю...</span>
+</div>
+
+<audio-visualizer>
+  <div class="vis-bar" data-index="0"></div>
+  <div class="vis-bar" data-index="1"></div>
+  <div class="vis-bar" data-index="2"></div>
+  <div class="vis-bar" data-index="3"></div>
+  <div class="vis-bar" data-index="4"></div>
+  <div class="vis-bar" data-index="5"></div>
+  <div class="vis-bar" data-index="6"></div>
+  <div class="vis-bar" data-index="7"></div>
+  <div class="vis-bar" data-index="8"></div>
+  <div class="vis-bar" data-index="9"></div>
+  <div class="vis-bar" data-index="10"></div>
+  <div class="vis-bar" data-index="11"></div>
+  <div class="vis-bar" data-index="12"></div>
+  <div class="vis-bar" data-index="13"></div>
+  <div class="vis-bar" data-index="14"></div>
+</audio-visualizer>
+
+<nav class="nav-bar" role="navigation" aria-label="Навигация по секциям">
+  <button class="audio-toggle" id="audio-toggle" aria-label="Включить/выключить музыку" title="Фоновая музыка">
+    <span class="audio-icon" aria-hidden="true">&#9835;</span>
+    <span class="audio-label">Музыка</span>
+  </button>
+  <div class="nav-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="nav-progress-fill" id="progress-fill"></div>
+  </div>
+</nav>
+
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+<main>
+
+  <section class="section hero" id="section-1" data-section="1" aria-label="Вступление">
+    <div class="hero-bg" aria-hidden="true">
+      <picture>
+        <source srcset="assets/images/hero/palace-hero.jpg" type="image/jpeg">
+        <img src="assets/images/hero/palace-hero.jpg" alt="Дворец Румянцевых-Паскевичей, панорамный вид" class="hero-img" loading="eager">
+      </picture>
+      <div class="hero-overlay" aria-hidden="true"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-kicker">ИСТОРИЯ ОДНОГО ДВОРЦА · ГОМЕЛЬ · 1777—2026</p>
+      <h1 class="hero-title">Дворец, переживший империи.</h1>
+      <p class="hero-subtitle">Дворец Румянцевых-Паскевичей — от Екатерины II до наших дней</p>
+    </div>
+    <div class="hero-scroll-hint">
+      <span class="scroll-hint-text">Прокрути, чтобы начать путешествие во времени</span>
+      <span class="scroll-hint-arrow" aria-hidden="true">↓</span>
+    </div>
+  </section>
+
+  <section class="section chapter" id="section-2" data-section="2" aria-label="Глава I: Эпоха основания">
+    <div class="chapter-bg">
+      <div class="paper-texture" aria-hidden="true"></div>
+    </div>
+    <div class="chapter-layout">
+      <div class="chapter-media" data-animate="slide-left">
+        <picture>
+          <source srcset="assets/images/chapter1/palace-archival.jpg" type="image/jpeg">
+          <img src="assets/images/chapter1/palace-archival.jpg" alt="Гравюра дворца конца XVIII века" loading="lazy" class="chapter-img">
+        </picture>
+      </div>
+      <div class="chapter-text" data-animate="fade-up">
+        <p class="chapter-kicker">ГЛАВА I · 1777—1796</p>
+        <h2 class="chapter-title">Подарок императрицы</h2>
+        <div class="chapter-body">
+          <p>В 1777 году императрица Екатерина II пожаловала гомельские земли графу Петру Румянцеву-Задунайскому — прославленному полководцу, победителю турок при Кагуле и Ларге.</p>
+          <p>В благодарность за верную службу императрица велела построить для фельдмаршала дворец, достойный его заслуг. Строительство велось с 1777 по 1796 год под руководством архитекторов итальянской школы.</p>
+          <p>Двухэтажный дворец в стиле классицизма с бельведером, колоннадой и роскошными интерьерами стал жемчужиной Гомеля. Архитектурный замысел приписывается итальянскому мастеру Antonio Rinaldi, который работал над проектом совместно с русскими зодчими.</p>
+          <p>Главный фасад дворца, обращённый к Сожу, украшала колоннада из десяти ионических колонн высотой 12 метров. Парадные залы с лепниной, позолотой и живописными плафонами поражали воображение современников.</p>
+        </div>
+        <blockquote class="chapter-quote">
+          <p>«Дом сей построен на века и послужит украшением города и памятником монаршей милости.»</p>
+          <cite>— из указа Екатерины II, 1777 г.</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section portrait" id="section-3" data-section="3" aria-label="Глава II: Полководец, получивший дворец">
+    <div class="portrait-container">
+      <div class="portrait-frame" data-animate="scale-in">
+        <div class="portrait-ring" aria-hidden="true">
+          <svg viewBox="0 0 300 300" class="portrait-svg">
+            <circle cx="150" cy="150" r="130" fill="none" stroke="var(--accent)" stroke-width="2" class="portrait-circle" stroke-dasharray="816.8" stroke-dashoffset="816.8"/>
+          </svg>
+        </div>
+        <picture>
+          <source srcset="assets/images/chapter2/rumyantsev-portrait.jpg" type="image/jpeg">
+          <img src="assets/images/chapter2/rumyantsev-portrait.jpg" alt="Портрет графа Петра Румянцева-Задунайского, фельдмаршала" loading="lazy" class="portrait-img">
+        </picture>
+      </div>
+      <div class="portrait-info">
+        <p class="chapter-kicker">ГЛАВА II</p>
+        <h2 class="chapter-title">Полководец, получивший дворец</h2>
+        <p class="portrait-name">Пётр Румянцев-Задунайский <span class="portrait-years">(1725—1796)</span></p>
+        <div class="chapter-body">
+          <p>Граф Пётр Румянцев — один из величайших полководцев Российской империи. Победитель в русско-турецких войнах, генерал-фельдмаршал, кавалер ордена Святого Георгия I степени.</p>
+          <p>Получив Гомель в дар от Екатерины II, он не успел насладиться дворцом — скончался в 1796 году, вскоре после завершения строительства.</p>
+          <p>Его сын — Николай Румянцев, известный государственный деятель и покровитель наук, основал знаменитое Румянцевское собрание — коллекцию рукописей и древностей, ставшую основой Российского государственного исторического музея.</p>
+        </div>
+      </div>
+      <div class="portrait-facts" data-animate="stagger-facts">
+        <div class="fact" style="--fact-delay: 0.1s">• 1770 — победа при Кагуле</div>
+        <div class="fact" style="--fact-delay: 0.3s">• 1775 — титул графа Задунайского</div>
+        <div class="fact" style="--fact-delay: 0.5s">• 1777 — пожалован Гомель</div>
+        <div class="fact" style="--fact-delay: 0.7s">• 1796 — скончался</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section drama" id="section-4" data-section="4" aria-label="Глава III: Эпоха Паскевича">
+    <div class="drama-watermark" aria-hidden="true">1834</div>
+    <div class="drama-bg" aria-hidden="true">
+      <div class="drama-texture" aria-hidden="true"></div>
+    </div>
+    <div class="drama-portrait" aria-hidden="true">
+      <picture>
+        <img src="assets/images/chapter3/paskevich-portrait.jpg" alt="" loading="lazy" class="drama-portrait-img">
+      </picture>
+    </div>
+    <div class="drama-content">
+      <p class="chapter-kicker">ГЛАВА III · 1834</p>
+      <h2 class="chapter-title drama-title">Эпоха Паскевича</h2>
+      <div class="chapter-body drama-text">
+        <p>После смерти Румянцева дворец сменил нескольких владельцев. В 1834 году его приобрёл фельдмаршал Иван Паскевич-Эриванский — герой Кавказской войны, наместник Царства Польского.</p>
+        <p class="typewriter-text">При Паскевиче дворец пережил вторую молодость. Были добавлены боковые флигели, разбит великолепный парк, создан зимний сад. Интерьеры украсили произведения искусства, собранные фельдмаршалом по всей Европе.</p>
+        <p>Паскевич привёз из походов коллекцию оружия, гобелены, картины европейских мастеров. Библиотека дворца насчитывала более 10 000 томов.</p>
+        <p>Гомельский дворец стал одним из самых роскошных поместий Российской империи. Здесь бывали А.С. Пушкин, Н.В. Гоголь, М.И. Глинка.</p>
+      </div>
+      <div class="drama-divider" aria-hidden="true"></div>
+      <blockquote class="chapter-quote drama-quote">
+        <p>«Гомель — жемчужина моих владений, место, где я нахожу покой после военных трудов.»</p>
+        <cite>— Иван Паскевич, 1845 г.</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section compare" id="section-5" data-section="5" aria-label="Интерактив: Было / Стало">
+    <div class="compare-header">
+      <p class="chapter-kicker">ИНТЕРАКТИВ · ПЕРЕТАЩИ ПОЛЗУНОК</p>
+      <h2 class="chapter-title">Один дворец. Две эпохи.</h2>
+      <p class="compare-subtitle">Потяни за золотую ручку, чтобы увидеть, как менялся Дворец Румянцевых-Паскевичей с конца XIX века до наших дней.</p>
+    </div>
+    <div class="slider-container" id="comparison-slider" role="slider" aria-label="Сравнение архивного и современного фото дворца" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+      <div class="slider-image before-image">
+        <picture>
+          <source srcset="assets/images/chapter4/palace-exterior.jpg" type="image/jpeg">
+          <img src="assets/images/chapter4/palace-exterior.jpg" alt="Архивное фото дворца, конец XIX века" loading="lazy">
+        </picture>
+      </div>
+      <div class="slider-image after-image" style="clip-path: inset(0 0 0 50%);">
+        <picture>
+          <source srcset="assets/images/chapter4/palace-12.jpg" type="image/jpeg">
+          <img src="assets/images/chapter4/palace-12.jpg" alt="Современное фото дворца, тот же ракурс" loading="lazy">
+        </picture>
+      </div>
+      <div class="slider-handle" id="slider-handle" style="left: 50%;">
+        <div class="handle-line" aria-hidden="true"></div>
+        <div class="handle-knob" aria-hidden="true">
+          <span class="handle-label handle-left">Архив</span>
+          <span class="handle-icon">↔</span>
+          <span class="handle-label handle-right">Сегодня</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section timeline" id="section-6" data-section="6" aria-label="Таймлайн эпох">
+    <div class="timeline-header">
+      <p class="chapter-kicker">ХРОНОЛОГИЯ</p>
+      <h2 class="chapter-title">Вехи истории</h2>
+    </div>
+    <div class="timeline-container">
+      <div class="timeline-line" aria-hidden="true">
+        <div class="timeline-line-fill" id="timeline-fill"></div>
+      </div>
+      <div class="timeline-events">
+        <article class="timeline-event" data-year="1777">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1777</time>
+            <p class="event-desc">Начало строительства. Екатерина II жалует Гомель Румянцеву.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1785">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1785</time>
+            <p class="event-desc">Завершение главного корпуса. Начало строительства парка.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1796">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1796</time>
+            <p class="event-desc">Завершение строительства. Смерть Румянцева.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1834">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1834</time>
+            <p class="event-desc">Дворец покупает Иван Паскевич. Новая эпоха расцвета.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1856">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1856</time>
+            <p class="event-desc">После смерти Паскевича дворец переходит к его потомкам.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1919">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1919</time>
+            <p class="event-desc">Национализация. Открытие первого музея в Гомеле.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1926">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1926</time>
+            <p class="event-desc">Присвоение статуса памятника архитектуры республиканского значения.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1941">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1941—1944</time>
+            <p class="event-desc">Великая Отечественная война. Дворец сильно разрушен.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1950">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1950—1960</time>
+            <p class="event-desc">Восстановление и реставрация дворца.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="1990">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">1990-е</time>
+            <p class="event-desc">Начало масштабной реставрации интерьеров.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="2000">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">2000-е</time>
+            <p class="event-desc">Масштабная реконструкция. Создание дворцово-паркового ансамбля.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="2024">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">2024</time>
+            <p class="event-desc">Завершение реставрации фасадов. Открытие новых экспозиций.</p>
+          </div>
+        </article>
+        <article class="timeline-event" data-year="2026">
+          <div class="event-dot" aria-hidden="true"></div>
+          <div class="event-card">
+            <time class="event-year">2026</time>
+            <p class="event-desc">Один из главных музеев Беларуси. 249-летие дворца.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section voices" id="section-7" data-section="7" aria-label="Голоса прошлого">
+    <div class="voices-wave" aria-hidden="true">
+      <svg viewBox="0 0 200 80" class="wave-svg">
+        <path d="M0,40 Q25,20 50,40 T100,40 T150,40 T200,40" class="wave-path" fill="none" stroke="var(--accent)" stroke-width="1"/>
+        <path d="M0,40 Q25,10 50,40 T100,40 T150,40 T200,40" class="wave-path" fill="none" stroke="var(--accent)" stroke-width="0.5"/>
+        <path d="M0,40 Q25,30 50,40 T100,40 T150,40 T200,40" class="wave-path" fill="none" stroke="var(--accent)" stroke-width="0.3"/>
+      </svg>
+    </div>
+    <div class="voices-header">
+      <p class="chapter-kicker">СВИДЕТЕЛЬСТВА</p>
+      <h2 class="chapter-title">Голоса, которые помнят этот дворец</h2>
+    </div>
+    <div class="voices-cards">
+      <figure class="voice-card" data-animate="drop-in">
+        <blockquote>
+          <p>«Дворец в Гомеле есть один из великолепнейших в целой России. Парк и виды чудесные.»</p>
+        </blockquote>
+        <figcaption>— Александра Паскевич, дочь фельдмаршала, 1852</figcaption>
+      </figure>
+      <figure class="voice-card" data-animate="drop-in">
+        <blockquote>
+          <p>«Мы вошли в зал, где портреты Румянцева и Паскевича смотрели на нас с величием минувшей эпохи.»</p>
+        </blockquote>
+        <figcaption>— Из дневника путешественника, 1890</figcaption>
+      </figure>
+      <figure class="voice-card" data-animate="drop-in">
+        <blockquote>
+          <p>«Великий князь Николай Павлович, будущий император Николай I, посетил Гомель в 1835 году и был восхищён дворцом Паскевича.»</p>
+        </blockquote>
+        <figcaption>— Из путевых записок, 1835</figcaption>
+      </figure>
+      <figure class="voice-card" data-animate="drop-in">
+        <blockquote>
+          <p>«После освобождения Гомеля мы увидели дворец разрушенным. Казалось, его невозможно восстановить. Но мы справились.»</p>
+        </blockquote>
+        <figcaption>— Иван Мельников, реставратор, 1953</figcaption>
+      </figure>
+      <figure class="voice-card" data-animate="drop-in">
+        <blockquote>
+          <p>«Когда я впервые увидела парадную лестницу с лепниной и колоннами, я почувствовала себя перенесённой в другую эпоху.»</p>
+        </blockquote>
+        <figcaption>— Мария Кончаловская, художник, 1968</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section today" id="section-8" data-section="8" aria-label="Дворец сегодня">
+    <div class="today-bg" aria-hidden="true">
+      <picture>
+        <source srcset="assets/images/chapter4/palace-9.jpg" type="image/jpeg">
+        <img src="assets/images/chapter4/palace-9.jpg" alt="Современный вид на Дворец Румянцевых-Паскевичей" loading="lazy" class="today-img">
+      </picture>
+      <div class="today-overlay" aria-hidden="true"></div>
+    </div>
+    <div class="today-content">
+      <div class="today-info">
+        <p class="chapter-kicker">СЕГОДНЯ</p>
+        <h2 class="chapter-title">Дворец живёт. И ждёт тебя.</h2>
+        <p class="today-desc">Сегодня Дворец Румянцевых-Паскевичей — это Гомельский дворцово-парковый ансамбль, один из главных музеев Беларуси. Здесь расположены:</p>
+        <ul class="today-list">
+          <li>Музей истории Гомеля (более 12 000 экспонатов)</li>
+          <li>Художественная галерея с коллекцией XVIII—XXI веков</li>
+          <li>Парк XVIII века площадью 30 гектаров</li>
+          <li>Петропавловский собор (1809—1819)</li>
+          <li>Ансамбль карьер и мостков</li>
+          <li>Летний театр и открытые площадки</li>
+        </ul>
+        <address class="today-address">
+          <span class="address-line">&#128205; г. Гомель, пл. Ленина, 4</span>
+          <span class="address-line">&#128338; 10:00—18:00 (вт-вс), пн — выходной</span>
+          <span class="address-line">&#127760; <a href="https://palacegomel.museum.by" target="_blank" rel="noopener">palacegomel.museum.by</a></span>
+          <span class="address-line">&#128222; +375 (232) 50-98-18</span>
+        </address>
+        <a href="https://maps.google.com/?q=52.422133,31.016917" target="_blank" rel="noopener" class="btn-map">Посмотреть на карте</a>
+      </div>
+      <div class="today-map" id="map" aria-label="Карта расположения дворца"></div>
+    </div>
+  </section>
+
+  <section class="section final" id="section-9" data-section="9" aria-label="Финал">
+    <div class="final-content">
+      <blockquote class="final-quote">
+        <p>«Каждый камень этого дворца хранит историю величия, войны и возрождения. Два с половиной века — лишь мгновение в жизни камня. Но для людей это целая вечность.»</p>
+      </blockquote>
+      <p class="final-signature">Дворец Румянцевых-Паскевичей · Гомель · 2026</p>
+      <div class="final-buttons">
+        <button class="btn btn-outline" id="btn-sources">Источники и архивы</button>
+      <a href="#section-1" class="btn btn-outline" id="btn-restart">Начать сначала</a>
+      </div>
+      <small class="final-sources">
+        Историческая справка подготовлена на основе материалов:<br>
+        • Гомельский областной краеведческий музей<br>
+        • Национальный архив Республики Беларусь<br>
+        • «Дворцово-парковый ансамбль в Гомеле» (монография, 2010)<br>
+        • Государственный архив Гомельской области
+      </small>
+    </div>
+  </section>
+
+</main>
+
+<div class="sources-modal" id="sources-modal" role="dialog" aria-labelledby="sources-title" aria-hidden="true">
+  <div class="modal-backdrop" aria-hidden="true"></div>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Закрыть">&times;</button>
+    <h3 id="sources-title">Источники и архивы</h3>
+    <ul class="sources-list">
+      <li><a href="https://palacegomel.museum.by" target="_blank" rel="noopener">Гомельский дворцово-парковый ансамбль — Официальный сайт</a></li>
+      <li><a href="https://commons.wikimedia.org/wiki/Category:Palace_of_Paskievi%C4%8Ds,_Gomel" target="_blank" rel="noopener">Wikimedia Commons — Изображения дворца</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Gomel_Palace" target="_blank" rel="noopener">Gomel Palace — Wikipedia</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Pyotr_Rumyantsev" target="_blank" rel="noopener">Пётр Румянцев-Задунайский — Wikipedia</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Ivan_Paskevich" target="_blank" rel="noopener">Иван Паскевич — Wikipedia</a></li>
+      <li><a href="https://archives.gov.by" target="_blank" rel="noopener">Национальный архив Республики Беларусь</a></li>
+    </ul>
+  </div>
+</div>
+
+<script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script nomodule>document.querySelector('.loading-overlay').classList.add('hidden');</script>
+<script defer src="js/audio.js"></script>
+<script defer src="js/slider.js"></script>
+<script defer src="js/animations.js"></script>
+<script defer src="js/main.js"></script>
+
+</body>
+</html>
