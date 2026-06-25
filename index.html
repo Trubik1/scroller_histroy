@@ -381,34 +381,9 @@
         </figcaption>
       </figure>
     </div>
-    <div class="layers-3d" aria-label="3D-артефакт: покрути, чтобы рассмотреть">
-      <div class="artifact-box" id="artifact-box">
-        <div class="artifact-face artifact-front">
-          <span class="artifact-year">1777</span>
-          <span class="artifact-label">Закладной камень</span>
-        </div>
-        <div class="artifact-face artifact-back">
-          <span class="artifact-year">1834</span>
-          <span class="artifact-label">Герб Паскевичей</span>
-        </div>
-        <div class="artifact-face artifact-right">
-          <span class="artifact-year">1919</span>
-          <span class="artifact-label">Музейная печать</span>
-        </div>
-        <div class="artifact-face artifact-left">
-          <span class="artifact-year">1941</span>
-          <span class="artifact-label">Осколок снаряда</span>
-        </div>
-        <div class="artifact-face artifact-top">
-          <span class="artifact-year">2026</span>
-          <span class="artifact-label">QR-код истории</span>
-        </div>
-        <div class="artifact-face artifact-bottom">
-          <span class="artifact-year">≈</span>
-          <span class="artifact-label">Вечность</span>
-        </div>
-      </div>
-      <p class="artifact-hint">Покрути артефакт</p>
+    <div class="layers-3d" aria-label="3D-модель дворца: перетащи, чтобы рассмотреть">
+      <div class="artifact-scene" id="artifact-scene"></div>
+      <p class="artifact-hint">Покрути 3D-модель дворца</p>
     </div>
   </section>
 
@@ -537,10 +512,13 @@
 <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script nomodule>document.querySelector('.loading-overlay').classList.add('hidden');</script>
 <script defer src="js/audio.js"></script>
 <script defer src="js/slider.js"></script>
 <script defer src="js/layers.js"></script>
+<script defer src="js/artifact3d.js"></script>
 <script defer src="js/animations.js"></script>
 <script defer src="js/main.js"></script>
 
