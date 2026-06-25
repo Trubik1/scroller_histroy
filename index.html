@@ -114,19 +114,25 @@
 
   <section class="section portrait" id="section-3" data-section="3" aria-label="Глава II: Полководец, получивший дворец">
     <div class="portrait-container">
-      <div class="portrait-frame" data-animate="scale-in">
-        <div class="portrait-ring" aria-hidden="true">
-          <svg viewBox="0 0 300 300" class="portrait-svg">
-            <circle cx="150" cy="150" r="130" fill="none" stroke="var(--accent)" stroke-width="2" class="portrait-circle" stroke-dasharray="816.8" stroke-dashoffset="816.8"/>
-          </svg>
+      <div class="portrait-media" data-animate="scale-in">
+        <div class="portrait-frame">
+          <picture>
+            <source srcset="assets/images/chapter2/rumyantsev-portrait.jpg" type="image/jpeg">
+            <img src="assets/images/chapter2/rumyantsev-portrait.jpg" alt="Портрет графа Петра Румянцева-Задунайского, фельдмаршала" loading="lazy" class="portrait-img">
+          </picture>
+          <div class="portrait-ring" aria-hidden="true">
+            <svg viewBox="0 0 300 300" class="portrait-svg">
+              <circle cx="150" cy="150" r="130" fill="none" stroke="var(--accent)" stroke-width="2" class="portrait-circle" stroke-dasharray="816.8" stroke-dashoffset="816.8"/>
+            </svg>
+          </div>
         </div>
-        <picture>
-          <source srcset="assets/images/chapter2/rumyantsev-portrait.jpg" type="image/jpeg">
-          <img src="assets/images/chapter2/rumyantsev-portrait.jpg" alt="Портрет графа Петра Румянцева-Задунайского, фельдмаршала" loading="lazy" class="portrait-img">
-        </picture>
+        <div class="portrait-archive" aria-hidden="true">
+          <img src="assets/images/chapter2/rumyantsev-archive.svg" alt="Печать графства Задунайского" loading="lazy" class="archive-img">
+          <span class="archive-caption">Печать графства Задунайского</span>
+        </div>
       </div>
       <div class="portrait-info">
-        <p class="chapter-kicker">ГЛАВА II</p>
+        <p class="chapter-kicker">ГЛАВА II · 1777—1796</p>
         <h2 class="chapter-title">Полководец, получивший дворец</h2>
         <p class="portrait-name">Пётр Румянцев-Задунайский <span class="portrait-years">(1725—1796)</span></p>
         <div class="chapter-body">
@@ -134,6 +140,10 @@
           <p>Получив Гомель в дар от Екатерины II, он не успел насладиться дворцом — скончался в 1796 году, вскоре после завершения строительства.</p>
           <p>Его сын — Николай Румянцев, известный государственный деятель и покровитель наук, основал знаменитое Румянцевское собрание — коллекцию рукописей и древностей, ставшую основой Российского государственного исторического музея.</p>
         </div>
+        <blockquote class="chapter-quote">
+          <p>«Верность и храбрость — основы величия. Гомель станет символом обеих.»</p>
+          <cite>— из письма Петра Румянцева, 1785 г.</cite>
+        </blockquote>
       </div>
       <div class="portrait-facts" data-animate="stagger-facts">
         <div class="fact" style="--fact-delay: 0.1s">• 1770 — победа при Кагуле</div>
@@ -306,7 +316,103 @@
     </div>
   </section>
 
-  <section class="section voices" id="section-7" data-section="7" aria-label="Голоса прошлого">
+  <section class="section layers" id="section-7" data-section="7" aria-label="Слои времени">
+    <div class="layers-header">
+      <p class="chapter-kicker">СЛОИ ВРЕМЕНИ</p>
+      <h2 class="chapter-title">Один дворец. Пять эпох.</h2>
+      <p class="layers-subtitle">Проведи пальцем или кликни — увидишь, как менялся дворец на протяжении 250 лет.</p>
+    </div>
+    <div class="layers-tabs" role="tablist" aria-label="Выбор эпохи">
+      <button class="layer-tab active" role="tab" aria-selected="true" data-layer="1777" aria-controls="layer-1777">1777</button>
+      <button class="layer-tab" role="tab" aria-selected="false" data-layer="1834" aria-controls="layer-1834">1834</button>
+      <button class="layer-tab" role="tab" aria-selected="false" data-layer="1919" aria-controls="layer-1919">1919</button>
+      <button class="layer-tab" role="tab" aria-selected="false" data-layer="1941" aria-controls="layer-1941">1941</button>
+      <button class="layer-tab" role="tab" aria-selected="false" data-layer="2026" aria-controls="layer-2026">2026</button>
+    </div>
+    <div class="layers-viewport">
+      <figure class="layer-panel active" id="layer-1777" role="tabpanel">
+        <picture>
+          <source srcset="assets/images/chapter1/palace-archival.jpg" type="image/jpeg">
+          <img src="assets/images/chapter1/palace-archival.jpg" alt="Дворец в эпоху основания, 1777" loading="lazy" class="layer-img">
+        </picture>
+        <figcaption class="layer-caption">
+          <span class="layer-era">1777 — Эпоха основания</span>
+          <span class="layer-desc">Дворец только построен. Стиль классицизма, бельведер, колоннада. Владелец — Пётр Румянцев.</span>
+        </figcaption>
+      </figure>
+      <figure class="layer-panel" id="layer-1834" role="tabpanel">
+        <picture>
+          <source srcset="assets/images/chapter4/palace-exterior.jpg" type="image/jpeg">
+          <img src="assets/images/chapter4/palace-exterior.jpg" alt="Дворец в эпоху Паскевича, 1834" loading="lazy" class="layer-img">
+        </picture>
+        <figcaption class="layer-caption">
+          <span class="layer-era">1834 — Эпоха Паскевича</span>
+          <span class="layer-desc">Фельдмаршал Паскевич перестраивает дворец: флигели, зимний сад, парк. Расцвет резиденции.</span>
+        </figcaption>
+      </figure>
+      <figure class="layer-panel" id="layer-1919" role="tabpanel">
+        <picture>
+          <source srcset="assets/images/chapter5/palace-1919.jpg" type="image/jpeg">
+          <img src="assets/images/chapter5/palace-1919.jpg" alt="Дворец после национализации, 1919" loading="lazy" class="layer-img">
+        </picture>
+        <figcaption class="layer-caption">
+          <span class="layer-era">1919 — Национализация</span>
+          <span class="layer-desc">Дворец стал музеем. Сменил владельца с частного на государственный. Начало новой эры.</span>
+        </figcaption>
+      </figure>
+      <figure class="layer-panel" id="layer-1941" role="tabpanel">
+        <picture>
+          <source srcset="assets/images/chapter5/palace-1941.jpg" type="image/jpeg">
+          <img src="assets/images/chapter5/palace-1941.jpg" alt="Дворец после войны, 1941—1944" loading="lazy" class="layer-img">
+        </picture>
+        <figcaption class="layer-caption">
+          <span class="layer-era">1941—1944 — Война</span>
+          <span class="layer-desc">Дворец сильно разрушен во время оккупации. Казалось, восстановление невозможно.</span>
+        </figcaption>
+      </figure>
+      <figure class="layer-panel" id="layer-2026" role="tabpanel">
+        <picture>
+          <source srcset="assets/images/chapter4/palace-12.jpg" type="image/jpeg">
+          <img src="assets/images/chapter4/palace-12.jpg" alt="Дворец сегодня, 2026" loading="lazy" class="layer-img">
+        </picture>
+        <figcaption class="layer-caption">
+          <span class="layer-era">2026 — Сегодня</span>
+          <span class="layer-desc">Дворцово-парковый ансамбль. Один из главных музеев Беларуси. 249 лет истории.</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="layers-3d" aria-label="3D-артефакт: покрути, чтобы рассмотреть">
+      <div class="artifact-box" id="artifact-box">
+        <div class="artifact-face artifact-front">
+          <span class="artifact-year">1777</span>
+          <span class="artifact-label">Закладной камень</span>
+        </div>
+        <div class="artifact-face artifact-back">
+          <span class="artifact-year">1834</span>
+          <span class="artifact-label">Герб Паскевичей</span>
+        </div>
+        <div class="artifact-face artifact-right">
+          <span class="artifact-year">1919</span>
+          <span class="artifact-label">Музейная печать</span>
+        </div>
+        <div class="artifact-face artifact-left">
+          <span class="artifact-year">1941</span>
+          <span class="artifact-label">Осколок снаряда</span>
+        </div>
+        <div class="artifact-face artifact-top">
+          <span class="artifact-year">2026</span>
+          <span class="artifact-label">QR-код истории</span>
+        </div>
+        <div class="artifact-face artifact-bottom">
+          <span class="artifact-year">≈</span>
+          <span class="artifact-label">Вечность</span>
+        </div>
+      </div>
+      <p class="artifact-hint">Покрути артефакт</p>
+    </div>
+  </section>
+
+  <section class="section voices" id="section-8" data-section="8" aria-label="Голоса прошлого">
     <div class="voices-wave" aria-hidden="true">
       <svg viewBox="0 0 200 80" class="wave-svg">
         <path d="M0,40 Q25,20 50,40 T100,40 T150,40 T200,40" class="wave-path" fill="none" stroke="var(--accent)" stroke-width="1"/>
@@ -352,7 +458,7 @@
     </div>
   </section>
 
-  <section class="section today" id="section-8" data-section="8" aria-label="Дворец сегодня">
+  <section class="section today" id="section-9" data-section="9" aria-label="Дворец сегодня">
     <div class="today-bg" aria-hidden="true">
       <picture>
         <source srcset="assets/images/chapter4/palace-9.jpg" type="image/jpeg">
@@ -382,10 +488,14 @@
         <a href="https://maps.google.com/?q=52.422133,31.016917" target="_blank" rel="noopener" class="btn-map">Посмотреть на карте</a>
       </div>
       <div class="today-map" id="map" aria-label="Карта расположения дворца"></div>
+      <button class="btn-historical-map" id="btn-historical-map" aria-pressed="false">
+        <span class="btn-historical-icon">🗺</span>
+        <span class="btn-historical-text">Историческая карта</span>
+      </button>
     </div>
   </section>
 
-  <section class="section final" id="section-9" data-section="9" aria-label="Финал">
+  <section class="section final" id="section-10" data-section="10" aria-label="Финал">
     <div class="final-content">
       <blockquote class="final-quote">
         <p>«Каждый камень этого дворца хранит историю величия, войны и возрождения. Два с половиной века — лишь мгновение в жизни камня. Но для людей это целая вечность.»</p>
@@ -430,6 +540,7 @@
 <script nomodule>document.querySelector('.loading-overlay').classList.add('hidden');</script>
 <script defer src="js/audio.js"></script>
 <script defer src="js/slider.js"></script>
+<script defer src="js/layers.js"></script>
 <script defer src="js/animations.js"></script>
 <script defer src="js/main.js"></script>
 

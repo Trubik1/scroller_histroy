@@ -10,7 +10,7 @@ class AudioManager {
     this.tracks = [
       { id: 'era1', src: 'assets/audio/ambient-1.mp3', volume: 0.3, sections: [1,2,3] },
       { id: 'era2', src: 'assets/audio/ambient-2.mp3', volume: 0.25, sections: [4,5] },
-      { id: 'era3', src: 'assets/audio/ambient-3.mp3', volume: 0.2, sections: [6,7,8,9] }
+      { id: 'era3', src: 'assets/audio/ambient-3.mp3', volume: 0.2, sections: [6,7,8,9,10] }
     ];
     this.lastSection = 0;
     this.button = document.getElementById('audio-toggle');
@@ -18,28 +18,38 @@ class AudioManager {
   }
 
   init() {
-    this.button.addEventListener('click', () => this.toggle());
+    this.button?.addEventListener('click', (e) => { this.activate(); this.toggle(); });
+    this.button?.addEventListener('touchstart', (e) => { this.activate(); this.toggle(); }, { passive: true });
     document.addEventListener('scroll', () => this.activate(), { once: true });
     document.addEventListener('click', () => this.activate(), { once: true });
     document.addEventListener('keydown', () => this.activate(), { once: true });
+    document.addEventListener('touchstart', () => this.activate(), { once: true });
+    document.addEventListener('pointerdown', () => this.activate(), { once: true });
   }
 
   async activate() {
     if (this.userActivated) return;
     this.userActivated = true;
-    this.context = new (window.AudioContext || window.webkitAudioContext)();
-    if (this.context.state === 'suspended') await this.context.resume();
-    this.gainNode = this.context.createGain();
-    this.gainNode.gain.value = 0;
-    this.gainNode.connect(this.context.destination);
-    this.button.classList.remove('muted');
-    this.tryPlayTrack(this.getTrackForSection(1));
+    try {
+      this.context = new (window.AudioContext || window.webkitAudioContext)();
+      if (this.context.state === 'suspended') await this.context.resume();
+      this.gainNode = this.context.createGain();
+      this.gainNode.gain.value = 0;
+      this.gainNode.connect(this.context.destination);
+      this.button?.classList.remove('muted');
+      this.tryPlayTrack(this.getTrackForSection(1));
+    } catch (e) {
+      console.warn('AudioManager: activation failed', e.message);
+    }
   }
 
   toggle() {
-    if (!this.userActivated) return;
+    if (!this.userActivated) {
+      this.activate();
+      return;
+    }
     this.isMuted = !this.isMuted;
-    this.button.classList.toggle('muted', this.isMuted);
+    this.button?.classList.toggle('muted', this.isMuted);
     if (this.gainNode) {
       this.gainNode.gain.value = this.isMuted ? 0 : (this.tracks[this.currentTrackIndex]?.volume || 0.3);
     }

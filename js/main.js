@@ -35,6 +35,9 @@
     if (container) slider = new ComparisonSlider(container);
   } catch(e) { console.warn('ComparisonSlider init failed'); }
 
+  let layers = null;
+  try { layers = new Layers(); } catch(e) { console.warn('Layers init failed'); }
+
   let animations = null;
   try { animations = new ScrollytellingAnimations(); } catch(e) { console.warn('Animations init failed'); }
 
