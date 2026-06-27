@@ -177,9 +177,7 @@ class ScrollytellingAnimations {
       scrollTrigger: { trigger: '#section-7', start: 'top 80%', end: 'top 40%', scrub: 1 } });
     gsap.fromTo('.layer-tab', { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: 'power2.out',
       scrollTrigger: { trigger: '#section-7', start: 'top 75%', end: 'top 35%', scrub: 1 } });
-    gsap.fromTo('.layer-panel.active .layer-img', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '#section-7', start: 'top 70%', end: 'top 30%', scrub: 1 } });
-    gsap.fromTo('.layer-panel.active .layer-caption', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power2.out',
+    gsap.fromTo('.layer-img', { scale: 0.95 }, { scale: 1, duration: 1.2, ease: 'power3.out',
       scrollTrigger: { trigger: '#section-7', start: 'top 70%', end: 'top 30%', scrub: 1 } });
   }
 
