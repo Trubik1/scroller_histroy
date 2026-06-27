@@ -128,7 +128,7 @@ class ScrollytellingAnimations {
     const tl = gsap.timeline({
       scrollTrigger: { trigger: '#section-4', start: 'top 80%', end: 'center center', scrub: 0.5 }
     });
-    tl.fromTo('.drama-bg', { opacity: 0.18 }, { opacity: 1, backgroundColor: '#8b2635', duration: 1.5, ease: 'power2.inOut' });
+    tl.fromTo('.drama-bg', { opacity: 0.18 }, { opacity: 0.6, duration: 1.5, ease: 'power2.inOut' });
     tl.fromTo('.drama-watermark', { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 0.03, duration: 1.5, ease: 'power3.out' }, '<');
     tl.fromTo('.drama-title', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power2.out' }, '<0.1');
     tl.fromTo('.drama-text p', { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: 'power2.out' }, '<0.2');

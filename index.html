@@ -514,6 +514,11 @@
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+if (typeof THREE === 'undefined') {
+  document.querySelector('.loading-overlay')?.classList.remove('hidden');
+}
+</script>
 <script nomodule>document.querySelector('.loading-overlay').classList.add('hidden');</script>
 <script defer src="js/audio.js"></script>
 <script defer src="js/slider.js"></script>

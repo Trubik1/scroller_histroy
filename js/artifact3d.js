@@ -1,10 +1,26 @@
 class Artifact3D {
   constructor(container) {
     this.container = container;
-    this.init();
+    try {
+      this.init();
+    } catch (e) {
+      console.warn('Artifact3D init failed:', e);
+      this.showFallback();
+    }
+  }
+
+  showFallback() {
+    this.container.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#c9a961;font-family:monospace;font-size:0.8rem;text-align:center;padding:1rem;">
+        3D-модель загружается...<br>Попробуйте обновить страницу
+      </div>`;
   }
 
   init() {
+    if (typeof THREE === 'undefined') {
+      throw new Error('Three.js not loaded');
+    }
+
     const w = this.container.clientWidth || 400;
     const h = this.container.clientHeight || 300;
 
@@ -18,17 +34,20 @@ class Artifact3D {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.2;
+    this.renderer.setClearColor(0x000000, 0);
     this.container.appendChild(this.renderer.domElement);
 
-    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = true;
-    this.controls.dampingFactor = 0.08;
-    this.controls.autoRotate = true;
-    this.controls.autoRotateSpeed = 1.5;
-    this.controls.minDistance = 4;
-    this.controls.maxDistance = 20;
-    this.controls.maxPolarAngle = Math.PI / 2.2;
-    this.controls.target.set(0, 0.5, 0);
+    if (typeof THREE.OrbitControls !== 'undefined') {
+      this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.enableDamping = true;
+      this.controls.dampingFactor = 0.08;
+      this.controls.autoRotate = true;
+      this.controls.autoRotateSpeed = 1.5;
+      this.controls.minDistance = 4;
+      this.controls.maxDistance = 20;
+      this.controls.maxPolarAngle = Math.PI / 2.2;
+      this.controls.target.set(0, 0.5, 0);
+    }
 
     this.buildPalace();
     this.addLights();
@@ -41,19 +60,12 @@ class Artifact3D {
       this.renderer.setSize(w2, h2);
     };
     window.addEventListener('resize', resize);
-    this._cleanup = () => window.removeEventListener('resize', resize);
 
-    const raf = () => {
-      this._rafId = requestAnimationFrame(raf);
-      this.controls.update();
-      this.renderer.render(this.scene, this.camera);
-    };
-    this._rafId = requestAnimationFrame(raf);
+    this.animate();
   }
 
   addLights() {
-    const ambient = new THREE.AmbientLight(0x404060, 0.4);
-    this.scene.add(ambient);
+    this.scene.add(new THREE.AmbientLight(0x404060, 0.4));
     const key = new THREE.DirectionalLight(0xffdcaa, 1.8);
     key.position.set(5, 10, 7);
     this.scene.add(key);
@@ -132,5 +144,14 @@ class Artifact3D {
     addWire(new THREE.BoxGeometry(1.42, 1.02, 1.62), 2.1, 0.5, 0);
 
     this.scene.add(group);
+  }
+
+  animate() {
+    const raf = () => {
+      this._rafId = requestAnimationFrame(raf);
+      if (this.controls) this.controls.update();
+      this.renderer.render(this.scene, this.camera);
+    };
+    this._rafId = requestAnimationFrame(raf);
   }
 }

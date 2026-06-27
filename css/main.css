@@ -445,34 +445,36 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   bottom: 10%;
   width: 120px; height: 160px;
   z-index: 1;
-  opacity: 0.15;
+  opacity: 0.25;
   pointer-events: none;
   border-radius: 4px;
   overflow: hidden;
+  border: 1px solid rgba(201,169,97,0.15);
 }
 
 @media (min-width: 768px) {
-  .drama-portrait { width: 180px; height: 240px; opacity: 0.1; }
+  .drama-portrait { width: 180px; height: 240px; opacity: 0.2; }
 }
 
 .drama-portrait img {
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: sepia(0.5) contrast(1.2);
+  filter: sepia(0.3) contrast(1.1);
 }
 
 .drama-bg {
   position: absolute; inset: 0;
   z-index: 0;
-  background: var(--accent-red);
-  transition: background 0.8s var(--ease-in-out), opacity 0.8s ease;
+  background: var(--bg-secondary);
+  opacity: 0.6;
+  transition: opacity 0.8s ease;
 }
 
 .drama-texture {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, var(--accent-red) 0%, transparent 70%);
-  opacity: 0.08;
-  mix-blend-mode: multiply;
+  background: radial-gradient(ellipse at center, rgba(201,169,97,0.05) 0%, transparent 70%);
+  opacity: 0.3;
+  mix-blend-mode: screen;
 }
 
 .drama-watermark {
@@ -482,8 +484,8 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   font-family: var(--font-display);
   font-size: clamp(8rem, 25vw, 25rem);
   font-weight: 700;
-  color: var(--accent-red);
-  opacity: 0.03;
+  color: var(--accent);
+  opacity: 0.02;
   z-index: 0;
   pointer-events: none;
   user-select: none;
@@ -507,10 +509,10 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 }
 
 .drama-quote {
-  border-top-color: var(--accent-red);
+  border-top-color: var(--accent);
 }
 
-.drama-quote p { color: var(--accent-red); }
+.drama-quote p { color: var(--accent); }
 
 /* ====== COMPARE ====== */
 .compare {
@@ -805,13 +807,6 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   max-width: 800px;
   position: relative;
   min-height: 40vh;
-}
-
-.layers-header,
-.layer-tab,
-.layer-panel.active .layer-img,
-.layer-panel.active .layer-caption {
-  opacity: 0;
 }
 
 .layer-panel {
