@@ -10,7 +10,7 @@ class AudioManager {
     this.tracks = [
       { id: 'era1', src: 'assets/audio/ambient-1.mp3', volume: 0.3, sections: [1,2,3] },
       { id: 'era2', src: 'assets/audio/ambient-2.mp3', volume: 0.25, sections: [4,5] },
-      { id: 'era3', src: 'assets/audio/ambient-3.mp3', volume: 0.2, sections: [6,7,8,9,10] }
+      { id: 'era3', src: 'assets/audio/ambient-3.mp3', volume: 0.2, sections: [6,7,8,9,10,11,12,13] }
     ];
     this.lastSection = 0;
     this.button = document.getElementById('audio-toggle');

@@ -183,25 +183,25 @@ class ScrollytellingAnimations {
 
   animateToday() {
     gsap.fromTo('.today-info', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: 'power2.out',
-      scrollTrigger: { trigger: '#section-9', start: 'top 70%', end: 'top 35%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-12', start: 'top 70%', end: 'top 35%', scrub: 1 } });
     gsap.fromTo('.today-map', { opacity: 0 }, { opacity: 1, duration: 1.2, ease: 'power2.out',
-      scrollTrigger: { trigger: '#section-9 .today-map', start: 'top 80%', end: 'top 40%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-12 .today-map', start: 'top 80%', end: 'top 40%', scrub: 1 } });
     gsap.fromTo('.today-bg img', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.5, ease: 'power2.out',
-      scrollTrigger: { trigger: '#section-9', start: 'top 70%', end: 'top 30%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-12', start: 'top 70%', end: 'top 30%', scrub: 1 } });
   }
 
   animateTodayMobile() {
     gsap.fromTo('.today-bg img', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.5, ease: 'power2.out',
-      scrollTrigger: { trigger: '#section-9', start: 'top 80%', end: 'top 40%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-12', start: 'top 80%', end: 'top 40%', scrub: 1 } });
   }
 
   animateFinal() {
     gsap.fromTo('.final-quote', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 2, ease: 'power3.out',
-      scrollTrigger: { trigger: '#section-10', start: 'top 80%', end: 'top 50%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-13', start: 'top 80%', end: 'top 50%', scrub: 1 } });
     gsap.fromTo('.final-signature', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: 'power2.out',
-      scrollTrigger: { trigger: '#section-10 .final-signature', start: 'top 80%', end: 'top 50%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-13 .final-signature', start: 'top 80%', end: 'top 50%', scrub: 1 } });
     gsap.fromTo('.final-buttons', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.8, ease: 'power2.out',
-      scrollTrigger: { trigger: '#section-10 .final-buttons', start: 'top 80%', end: 'top 50%', scrub: 1 } });
+      scrollTrigger: { trigger: '#section-13 .final-buttons', start: 'top 80%', end: 'top 50%', scrub: 1 } });
   }
 
   setupProgressBar() {
@@ -220,7 +220,7 @@ class ScrollytellingAnimations {
   }
 
   setupSectionTriggers() {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 13; i++) {
       const el = document.getElementById(`section-${i}`);
       if (!el) continue;
       ScrollTrigger.create({
@@ -234,7 +234,7 @@ class ScrollytellingAnimations {
       });
     }
     ScrollTrigger.create({
-      trigger: '#section-9 .today-map',
+      trigger: '#section-12 .today-map',
       start: 'top 110%',
       onEnter: () => this.initMap()
     });
