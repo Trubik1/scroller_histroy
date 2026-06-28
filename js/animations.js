@@ -18,6 +18,9 @@ class ScrollytellingAnimations {
     this.animateTimeline();
     this.animateVoices();
     this.animateLayers();
+    this.animateLibrary();
+    this.animateCollection();
+    this.animatePark();
     this.animateFinal();
     this.setupProgressBar();
     this.setupSectionTriggers();
@@ -193,6 +196,31 @@ class ScrollytellingAnimations {
   animateTodayMobile() {
     gsap.fromTo('.today-bg img', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.5, ease: 'power2.out',
       scrollTrigger: { trigger: '#section-12', start: 'top 80%', end: 'top 40%', scrub: 1 } });
+  }
+
+  animateLibrary() {
+    gsap.fromTo('.library-info', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: '#section-9', start: 'top 75%', end: 'top 35%', scrub: 1 } });
+    gsap.fromTo('.stat-item', { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: '#section-9', start: 'top 70%', end: 'top 30%', scrub: 1 } });
+    gsap.fromTo('.book', { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'back.out(1.7)',
+      scrollTrigger: { trigger: '.book-stack', start: 'top 80%', end: 'top 40%', scrub: 1 } });
+  }
+
+  animateCollection() {
+    gsap.fromTo('.collection-content > *', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#section-10', start: 'top 75%', end: 'top 35%', scrub: 1 } });
+    gsap.fromTo('.collection-item', { y: 50, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: '#section-10', start: 'top 70%', end: 'top 30%', scrub: 1 } });
+  }
+
+  animatePark() {
+    gsap.fromTo('.park-info', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: '#section-11', start: 'top 75%', end: 'top 35%', scrub: 1 } });
+    gsap.fromTo('.feature-tag', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.1, duration: 0.5, ease: 'back.out(1.7)',
+      scrollTrigger: { trigger: '#section-11', start: 'top 70%', end: 'top 35%', scrub: 1 } });
+    gsap.fromTo('.park-era', { x: -30, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: '#section-11', start: 'top 65%', end: 'top 25%', scrub: 1 } });
   }
 
   animateFinal() {
