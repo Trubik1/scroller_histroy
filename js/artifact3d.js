@@ -32,6 +32,8 @@ class Artifact3D {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.2;
     this.renderer.setClearColor(0x000000, 0);
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.container.appendChild(this.renderer.domElement);
 
     if (typeof THREE.OrbitControls !== 'undefined') {
@@ -46,6 +48,7 @@ class Artifact3D {
     }
 
     this.addLights();
+    this.addGround();
     this.loadModel();
 
     window.addEventListener('resize', () => {
@@ -63,6 +66,7 @@ class Artifact3D {
     this.scene.add(new THREE.AmbientLight(0x404060, 0.5));
     const key = new THREE.DirectionalLight(0xffdcaa, 2.0);
     key.position.set(5, 10, 7);
+    key.castShadow = true;
     this.scene.add(key);
     const fill = new THREE.DirectionalLight(0x8888ff, 0.5);
     fill.position.set(-3, 2, -5);
@@ -70,6 +74,34 @@ class Artifact3D {
     const rim = new THREE.DirectionalLight(0xc9a961, 0.8);
     rim.position.set(-2, 1, 6);
     this.scene.add(rim);
+
+    const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+    const envScene = new THREE.Scene();
+    envScene.background = new THREE.Color(0x111122);
+    const envLight1 = new THREE.PointLight(0xffdcaa, 1, 20);
+    envLight1.position.set(5, 5, 5);
+    envScene.add(envLight1);
+    const envLight2 = new THREE.PointLight(0x8888ff, 1, 20);
+    envLight2.position.set(-5, 3, -5);
+    envScene.add(envLight2);
+    const envTexture = pmremGenerator.fromScene(envScene).texture;
+    this.scene.environment = envTexture;
+    pmremGenerator.dispose();
+  }
+
+  addGround() {
+    const ground = new THREE.Mesh(
+      new THREE.PlaneGeometry(10, 10),
+      new THREE.MeshStandardMaterial({
+        color: 0x0a0a0a,
+        roughness: 0.95,
+        metalness: 0.0
+      })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.01;
+    ground.receiveShadow = true;
+    this.scene.add(ground);
   }
 
   loadModel() {
@@ -79,17 +111,53 @@ class Artifact3D {
       return;
     }
 
+    const textureLoader = new THREE.TextureLoader();
+    const loadTex = (path) => textureLoader.load(path, undefined, undefined, () => null);
+
+    const colorMap = loadTex('assets/models/sword/metal.png');
+    const normalMap = loadTex('assets/models/sword/Textures/TextureNormal.jpg');
+    const roughnessMap = loadTex('assets/models/sword/Textures/TextureReflection.jpg');
+    const bumpMap = loadTex('assets/models/sword/Textures/TextureBump.jpg');
+
     const loader = new THREE.OBJLoader();
     loader.load(
       'assets/models/sword/Sword.obj',
       (obj) => {
+        const bladeMat = new THREE.MeshStandardMaterial({
+          color: 0xcccccc,
+          map: colorMap,
+          normalMap: normalMap,
+          roughnessMap: roughnessMap,
+          bumpMap: bumpMap,
+          bumpScale: 0.02,
+          roughness: 0.25,
+          metalness: 0.9,
+          envMapIntensity: 1.5
+        });
+
+        const goldMat = new THREE.MeshStandardMaterial({
+          color: 0xc9a961,
+          roughness: 0.3,
+          metalness: 0.8,
+          envMapIntensity: 1.2
+        });
+
+        const leatherMat = new THREE.MeshStandardMaterial({
+          color: 0x3d2b1f,
+          roughness: 0.8,
+          metalness: 0.1
+        });
+
         obj.traverse((child) => {
           if (child.isMesh) {
-            child.material = new THREE.MeshStandardMaterial({
-              color: 0xc9a961,
-              roughness: 0.3,
-              metalness: 0.7
-            });
+            const name = child.name.toLowerCase();
+            if (name.includes('guard') || name.includes('cross') || name.includes('pommel') || name.includes('ring')) {
+              child.material = goldMat;
+            } else if (name.includes('handle') || name.includes('grip') || name.includes('wrap')) {
+              child.material = leatherMat;
+            } else {
+              child.material = bladeMat;
+            }
           }
         });
 
